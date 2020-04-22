@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  *
  */
 class OutcomeTest {
-
+	
 	Outcome o1;
 	Outcome o2;
 	Outcome o3;
@@ -28,10 +28,10 @@ class OutcomeTest {
 		o3 = new Outcome("Black", 1);
 	}
 	
-	@Test
 	/**
-	 * 
+	 * Test method for {@link Outcome#Outcome(String, int)}.
 	 */
+	@Test
 	void testNotNull()
 	{
 		assertNotNull(o1);
@@ -49,7 +49,7 @@ class OutcomeTest {
 		assertEquals(200, o2.winAmount(100));
 		assertEquals(42, o3.winAmount(42));
 	}
-
+	
 	/**
 	 * Test method for {@link Outcome#equals(Outcome)}.
 	 */
@@ -60,7 +60,16 @@ class OutcomeTest {
 		assertFalse(o1.equals(o3));
 		assertFalse(o2.equals(o3));
 	}
-
+	
+	/**
+	 * Test method for {@link Outcome#hashCode(Outcome)}.
+	 */
+	/*@Test
+	void testHashCode()
+	{
+		
+	}*/
+	
 	/**
 	 * Test method for {@link Outcome#toString()}.
 	 */

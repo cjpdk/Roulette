@@ -26,6 +26,11 @@ public class Outcome extends Object {
 	{
 		return this.name == other.name;
 	}
+	/*
+	public int hashCode()
+	{
+		return toString().hashCode();
+	}*/
 	
 	public String toString()
 	{
