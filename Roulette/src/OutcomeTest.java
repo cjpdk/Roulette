@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Test;
  */
 class OutcomeTest {
 	
-	Outcome o1;
-	Outcome o2;
-	Outcome o3;
+	Outcome o1, o2, o3;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -32,7 +30,7 @@ class OutcomeTest {
 	 * Test method for {@link Outcome#Outcome(String, int)}.
 	 */
 	@Test
-	void testNotNull()
+	void testOutcome()
 	{
 		assertNotNull(o1);
 		assertNotNull(o2);
