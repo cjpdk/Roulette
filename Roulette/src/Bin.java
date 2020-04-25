@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * 
@@ -10,14 +10,14 @@ import java.util.ArrayList;
  */
 public class Bin {
 	
-	ArrayList<Outcome> winningOutcomes;
+	HashSet<Outcome> winningOutcomes;
 	
 	/**
 	 * 
 	 */
 	public Bin()
 	{
-		winningOutcomes = new ArrayList<Outcome>();
+		winningOutcomes = new HashSet<Outcome>();
 	}
 	
 	void add(Outcome oc)

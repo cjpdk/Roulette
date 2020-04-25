@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,10 +51,10 @@ class BinTest {
 	@Test
 	void testAdd()
 	{
-		ArrayList<Outcome> b1ocs = new ArrayList<Outcome>();
+		HashSet<Outcome> b1ocs = new HashSet<Outcome>();
 		b1ocs.add(red);
 		b1ocs.add(black);
-		ArrayList<Outcome> b2ocs = new ArrayList<Outcome>();
+		HashSet<Outcome> b2ocs = new HashSet<Outcome>();
 		b2ocs.add(red);
 		assertEquals(b1ocs, b1.winningOutcomes);
 		assertEquals(b2ocs, b2.winningOutcomes);
