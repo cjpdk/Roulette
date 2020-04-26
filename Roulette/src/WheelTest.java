@@ -54,6 +54,7 @@ class WheelTest {
 		wheel.addOutcome(1, red);
 		wheel.addOutcome(1, s1);
 		assertEquals(tmpBin.winningOutcomes, wheel.bins[1].winningOutcomes);
+		assertEquals(red.toString(), wheel.allOutcomes.get("Red (1:1)").toString());
 	}
 	
 	/**

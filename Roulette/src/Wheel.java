@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Random;
  */
 public class Wheel {
 	
+	HashMap<String, Outcome> allOutcomes;
 	Bin[] bins;
 	Random rng;
 	
@@ -18,6 +20,7 @@ public class Wheel {
 	 */
 	public Wheel(Random r)
 	{
+		allOutcomes = new HashMap<String, Outcome>();
 		bins = new Bin[38];
 		for (int i=0; i<38; i++)
 		{
@@ -29,6 +32,7 @@ public class Wheel {
 	void addOutcome(int index, Outcome oc)
 	{
 		bins[index].add(oc);
+		allOutcomes.put(oc.toString(), oc);
 	}
 	
 	Bin next()
