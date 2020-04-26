@@ -16,6 +16,7 @@ class WheelTest {
 	Outcome red, black, s1;
 	NonRandom r;
 	Wheel wheel;
+	BinBuilder binFactory;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -28,13 +29,14 @@ class WheelTest {
 		s1 = new Outcome("Single 1", 36);
 		r = new NonRandom();
 		wheel = new Wheel(r);
+		binFactory = new BinBuilder();
 	}
 	
 	/**
 	 * Test method for {@link Wheel#Wheel(java.util.Random)}.
 	 */
 	@Test
-	final void testWheelRandom()
+	final void testWheel()
 	{
 		assertNotNull(r);
 		assertNotNull(wheel);
@@ -74,10 +76,11 @@ class WheelTest {
 	@Test
 	final void testGet()
 	{
+		binFactory.buildBins(wheel);
+		Bin b0 = wheel.get(0);
 		Bin tmpBin = new Bin();
-		tmpBin.add(black);
-		wheel.addOutcome(13, black);
-		Bin getBin = wheel.get(13);
-		assertEquals(tmpBin.winningOutcomes, getBin.winningOutcomes);
+		tmpBin.add(new Outcome("Straight 0", 35));
+		tmpBin.add(new Outcome("Five 00-0-1-2-3", 6));
+		assertEquals(tmpBin.winningOutcomes.toString(), b0.winningOutcomes.toString());
 	}
 }

@@ -61,18 +61,18 @@ public class BinBuilder {
 	{
 		for (int i=1; i<=34; i+=3)
 		{
-			String ocName = "Split " + i + "-" + i+1;
+			String ocName = "Split " + i + "-" + (i+1);
 			Outcome splitOc = new Outcome(ocName, SPLIT_BET);
 			wheel.addOutcome(i, splitOc);
 			wheel.addOutcome(i+1, splitOc);
-			ocName = "Split " + i+1 + "-" + i+2;
+			ocName = "Split " + (i+1) + "-" + (i+2);
 			splitOc = new Outcome(ocName, SPLIT_BET);
 			wheel.addOutcome(i+1, splitOc);
 			wheel.addOutcome(i+2, splitOc);
 		}
 		for (int i=1; i<=33; i++)
 		{
-			String ocName = "Split " + i + "-" + i+3;
+			String ocName = "Split " + i + "-" + (i+3);
 			Outcome splitOc = new Outcome(ocName, SPLIT_BET);
 			wheel.addOutcome(i, splitOc);
 			wheel.addOutcome(i+3, splitOc);
@@ -83,7 +83,7 @@ public class BinBuilder {
 	{
 		for (int i=1; i<=34; i+=3)
 		{
-			String ocName = "Street " + i + "-" + i+1 + "-" + i+2;
+			String ocName = "Street " + i + "-" + (i+1) + "-" + (i+2);
 			Outcome streetOc = new Outcome(ocName, STREET_BET);
 			wheel.addOutcome(i, streetOc);
 			wheel.addOutcome(i+1, streetOc);
@@ -95,13 +95,13 @@ public class BinBuilder {
 	{
 		for (int i=1; i<=31; i+=3)
 		{
-			String ocName = "Corner " + i + "-" + i+1 + "-" + i+3 + "-" + i+4;
+			String ocName = "Corner " + i + "-" + (i+1) + "-" + (i+3) + "-" + (i+4);
 			Outcome cornerOc = new Outcome(ocName, CORNER_BET);
 			wheel.addOutcome(i, cornerOc);
 			wheel.addOutcome(i+1, cornerOc);
 			wheel.addOutcome(i+3, cornerOc);
 			wheel.addOutcome(i+4, cornerOc);
-			ocName = "Corner " + i+1 + "-" + i+2 + "-" + i+4 + "-" + i+5;
+			ocName = "Corner " + (i+1) + "-" + (i+2) + "-" + (i+4) + "-" + (i+5);
 			cornerOc = new Outcome(ocName, CORNER_BET);
 			wheel.addOutcome(i+1, cornerOc);
 			wheel.addOutcome(i+2, cornerOc);
@@ -114,7 +114,7 @@ public class BinBuilder {
 	{
 		for (int i=1; i<=31; i+=3)
 		{
-			String ocName = "Line " + i + "-" + i+1 + "-" + i+2 + "-" + i+3 + "-" + i+4 + "-" + i+5;
+			String ocName = "Line " + i + "-" + (i+1) + "-" + (i+2) + "-" + (i+3) + "-" + (i+4) + "-" + (i+5);
 			Outcome lineOc = new Outcome(ocName, LINE_BET);
 			wheel.addOutcome(i, lineOc);
 			wheel.addOutcome(i+1, lineOc);

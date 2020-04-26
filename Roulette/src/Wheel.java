@@ -39,25 +39,6 @@ public class Wheel {
 	
 	Bin get(int index)
 	{
-		if (index < 0 || index >= 38)
-		{
-			return null;
-		}
-		else return bins[index];
-	}
-	
-	public static void main(String[] args) {
-		NonRandom rng = new NonRandom();
-		Wheel w = new Wheel(rng);
-		for (int i=0; i<38; i++)
-		{
-			Outcome o = new Outcome("Single " + i, i);
-			w.addOutcome(i, o);
-		}
-		w.rng.setSeed(23);
-		for (int i=0; i<5; i++)
-		{
-			System.out.println(w.next());
-		}
+		return bins[index];
 	}
 }
