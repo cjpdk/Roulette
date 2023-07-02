@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +10,13 @@ import org.junit.jupiter.api.Test;
  * @author cjpdk
  *
  */
-class WheelTest {
-	
-	Outcome red, black, s1;
-	NonRandom r;
+class WheelTest
+{
+	Outcome red, black, zero, five;
+	NonRandom rng;
 	Wheel wheel;
 	BinBuilder binFactory;
+	String bin2str, bin18str, bin33str;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -26,10 +26,18 @@ class WheelTest {
 	{
 		red = new Outcome("Red", 1);
 		black = new Outcome("Black", 1);
-		s1 = new Outcome("Single 1", 36);
-		r = new NonRandom();
-		wheel = new Wheel(r);
+		zero = new Outcome("Straight 0", 35);
+		five = new Outcome("Five 00-0-1-2-3", 6);
+		
+		rng = new NonRandom();
+		wheel = new Wheel(rng);
+		
 		binFactory = new BinBuilder();
+		binFactory.buildBins(wheel);
+		
+		bin2str = "[1st Dozen (2:1), Straight 2 (35:1), Street 1-2-3 (11:1), Line 1-2-3-4-5-6 (5:1), Split 1-2 (17:1), Split 2-3 (17:1), Split 2-5 (17:1), Corner 1-2-4-5 (8:1), Column 2 (2:1), Lo (1-18) (1:1), Corner 2-3-5-6 (8:1), Even (1:1), Black (1:1)]";
+		bin18str = "[Line 13-14-15-16-17-18 (5:1), Street 16-17-18 (11:1), Corner 14-15-17-18 (8:1), 2nd Dozen (2:1), Split 15-18 (17:1), Split 17-18 (17:1), Split 18-21 (17:1), Corner 17-18-20-21 (8:1), Straight 18 (35:1), Column 3 (2:1), Lo (1-18) (1:1), Line 16-17-18-19-20-21 (5:1), Red (1:1), Even (1:1)]";
+		bin33str = "[Black (1:1), Hi (19-36) (1:1), Corner 29-30-32-33 (8:1), Line 31-32-33-34-35-36 (5:1), Line 28-29-30-31-32-33 (5:1), Split 30-33 (17:1), Split 32-33 (17:1), Split 33-36 (17:1), 3rd Dozen (2:1), Corner 32-33-35-36 (8:1), Straight 33 (35:1), Street 31-32-33 (11:1), Column 3 (2:1), Odd (1:1)]";
 	}
 	
 	/**
@@ -38,7 +46,8 @@ class WheelTest {
 	@Test
 	final void testWheel()
 	{
-		assertNotNull(r);
+		assertNotNull(binFactory);
+		assertNotNull(rng);
 		assertNotNull(wheel);
 	}
 	
@@ -48,13 +57,11 @@ class WheelTest {
 	@Test
 	final void testAddOutcome()
 	{
-		Bin tmpBin = new Bin();
-		tmpBin.add(red);
-		tmpBin.add(s1);
-		wheel.addOutcome(1, red);
-		wheel.addOutcome(1, s1);
-		assertEquals(tmpBin.winningOutcomes, wheel.bins[1].winningOutcomes);
-		assertEquals(red.toString(), wheel.allOutcomes.get("Red (1:1)").toString());
+		binFactory.buildBins(wheel);
+		assertTrue(wheel.outcomes.contains(red));
+		assertTrue(wheel.outcomes.contains(black));
+		assertTrue(wheel.outcomes.contains(zero));
+		assertTrue(wheel.outcomes.contains(five));
 	}
 	
 	/**
@@ -63,12 +70,19 @@ class WheelTest {
 	@Test
 	final void testNext()
 	{
-		Bin tmpBin = new Bin();
-		tmpBin.add(black);
-		wheel.addOutcome(17, black);
-		wheel.rng.setSeed(23);
-		Bin nextBin = wheel.next();
-		assertEquals(tmpBin.winningOutcomes, nextBin.winningOutcomes);
+		binFactory.buildBins(wheel);
+		wheel.rng.setSeed(2);
+		assertEquals(bin2str, wheel.next().toString());
+		wheel.rng.setSeed(18);
+		assertEquals(bin18str, wheel.next().toString());
+		wheel.rng.setSeed(33);
+		assertEquals(bin33str, wheel.next().toString());
+		wheel.rng.setSeed(40);
+		assertEquals(bin2str, wheel.next().toString());
+		wheel.rng.setSeed(94);
+		assertEquals(bin18str, wheel.next().toString());
+		wheel.rng.setSeed(147);
+		assertEquals(bin33str, wheel.next().toString());
 	}
 	
 	/**
@@ -78,10 +92,8 @@ class WheelTest {
 	final void testGet()
 	{
 		binFactory.buildBins(wheel);
-		Bin b0 = wheel.get(0);
-		Bin tmpBin = new Bin();
-		tmpBin.add(new Outcome("Straight 0", 35));
-		tmpBin.add(new Outcome("Five 00-0-1-2-3", 6));
-		assertEquals(tmpBin.winningOutcomes.toString(), b0.winningOutcomes.toString());
+		assertEquals(bin2str, wheel.get(2).toString());
+		assertEquals(bin18str, wheel.get(18).toString());
+		assertEquals(bin33str, wheel.get(33).toString());
 	}
 }

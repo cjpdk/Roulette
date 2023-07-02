@@ -6,18 +6,18 @@
  * @author cjpdk
  *
  */
-public class Bet {
-	
+public class Bet
+{
 	int amountBet;
 	Outcome chosenOutcome;
 	
 	/**
 	 * 
 	 */
-	public Bet(int n, Outcome oc)
+	public Bet(int money, Outcome outcome)
 	{
-		amountBet = n;
-		chosenOutcome = oc;
+		amountBet = money;
+		chosenOutcome = outcome;
 	}
 	
 	public int winAmount()
@@ -30,8 +30,13 @@ public class Bet {
 		return amountBet;
 	}
 	
+	@Override
 	public String toString()
 	{
-		return "€" + amountBet + " on " + chosenOutcome;
+		StringBuffer str = new StringBuffer("â‚¬");
+		str.append(amountBet);
+		str.append(" on ");
+		str.append(chosenOutcome.toString());
+		return str.toString();
 	}
 }

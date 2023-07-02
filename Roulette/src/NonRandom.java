@@ -8,22 +8,25 @@ import java.util.Random;
  * @author cjpdk
  *
  */
-public class NonRandom extends Random {
-	
-	int nextValue;
+@SuppressWarnings("serial")
+public class NonRandom extends Random
+{
+	public long nextValue;
 	
 	NonRandom()
 	{
-		nextValue = 1;
+		nextValue = 0;
 	}
 	
-	void setSeed(int n)
+	@Override
+	public void setSeed(long n)
 	{
 		nextValue = n;
 	}
 	
-	int choice(int[] list)
+	@Override
+	public int nextInt()
 	{
-		return list[nextValue];
+		return (int) nextValue;
 	}
 }

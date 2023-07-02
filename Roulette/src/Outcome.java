@@ -2,19 +2,20 @@
  * 
  */
 
+
 /**
  * @author cjpdk
  *
  */
-public class Outcome extends Object {
-	
+public class Outcome implements Comparable<Outcome>
+{
 	String name;
 	int odds;
 	
-	Outcome(String str, int n)
+	Outcome(String name, int odds)
 	{
-		name = str;
-		odds = n;
+		this.name = name;
+		this.odds = odds;
 	}
 	
 	int winAmount(int wager)
@@ -26,14 +27,27 @@ public class Outcome extends Object {
 	{
 		return this.name == other.name;
 	}
-	/*
+	
+	@Override
 	public int hashCode()
 	{
-		return toString().hashCode();
-	}*/
+		return name.hashCode();
+	}
 	
+	@Override
 	public String toString()
 	{
-		return name + " (" + odds + ":1)";
+		StringBuffer str = new StringBuffer();
+		str.append(name);
+		str.append(" (");
+		str.append(odds);
+		str.append(":1)");
+		return str.toString();
+	}
+
+	@Override
+	public int compareTo(Outcome o)
+	{
+		return hashCode()-o.hashCode();
 	}	
 }

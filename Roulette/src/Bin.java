@@ -1,4 +1,6 @@
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 
@@ -8,23 +10,39 @@ import java.util.HashSet;
  * @author cjpdk
  *
  */
-public class Bin {
-	
-	HashSet<Outcome> winningOutcomes;
+public class Bin
+{
+	Set<Outcome> winningOutcomes;
 	
 	/**
 	 * 
 	 */
 	public Bin()
 	{
-		winningOutcomes = new HashSet<Outcome>();
+		winningOutcomes = new TreeSet<>();
 	}
 	
-	void add(Outcome oc)
+	public Bin(Outcome[] outcomes)
 	{
-		winningOutcomes.add(oc);
+		this();
+		for (Outcome outcome : outcomes)
+		{
+			add(outcome);
+		}
 	}
 	
+	public Bin(Collection<Outcome> outcomes)
+	{
+		this();
+		winningOutcomes.addAll(outcomes);
+	}
+	
+	public void add(Outcome outcome)
+	{
+		winningOutcomes.add(outcome);
+	}
+	
+	@Override
 	public String toString()
 	{
 		return winningOutcomes.toString();

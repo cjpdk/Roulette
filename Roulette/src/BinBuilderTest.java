@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
  * @author cjpdk
  *
  */
-class BinBuilderTest {
-	
+class BinBuilderTest
+{
 	BinBuilder binFactory;
 	Random rng;
 	Wheel wheel;

@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,10 @@ import org.junit.jupiter.api.Test;
  * @author cjpdk
  *
  */
-class BinTest {
-	
-	Outcome red, black;
-	Bin b1, b2;
+class BinTest
+{
+	Outcome red, zero;
+	Bin bin1, bin2;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -25,12 +26,12 @@ class BinTest {
 	void setUp() throws Exception
 	{
 		red = new Outcome("Red", 1);
-		black = new Outcome("Black", 1);
-		b1 = new Bin();
-		b2 = new Bin();
-		b1.add(red);
-		b1.add(black);
-		b2.add(red);
+		zero = new Outcome("Single 0", 35);
+		bin1 = new Bin();
+		bin2 = new Bin();
+		bin1.add(red);
+		bin2.add(red);
+		bin2.add(zero);
 	}
 	
 	/**
@@ -40,9 +41,9 @@ class BinTest {
 	void testBin()
 	{
 		assertNotNull(red);
-		assertNotNull(black);
-		assertNotNull(b1);
-		assertNotNull(b2);
+		assertNotNull(zero);
+		assertNotNull(bin1);
+		assertNotNull(bin2);
 	}
 	
 	/**
@@ -51,13 +52,14 @@ class BinTest {
 	@Test
 	void testAdd()
 	{
-		HashSet<Outcome> b1ocs = new HashSet<Outcome>();
-		b1ocs.add(red);
-		b1ocs.add(black);
-		HashSet<Outcome> b2ocs = new HashSet<Outcome>();
-		b2ocs.add(red);
-		assertEquals(b1ocs, b1.winningOutcomes);
-		assertEquals(b2ocs, b2.winningOutcomes);
+		Set<Outcome> bin1outcomes = new TreeSet<>();
+		bin1outcomes.add(red);
+		Set<Outcome> bin2outcomes = new TreeSet<>();
+		bin2outcomes.add(red);
+		bin2outcomes.add(zero);
+		
+		assertEquals(bin1outcomes, bin1.winningOutcomes);
+		assertEquals(bin2outcomes, bin2.winningOutcomes);
 	}
 	
 	/**
@@ -66,9 +68,10 @@ class BinTest {
 	@Test
 	void testToString()
 	{
-		String b1str = "[Red (1:1), Black (1:1)]";
-		String b2str = "[Red (1:1)]";
-		assertEquals(b1str, b1.toString());
-		assertEquals(b2str, b2.toString());
+		String bin1str = "[Red (1:1)]";
+		String bin2str = "[Red (1:1), Single 0 (35:1)]";
+		
+		assertEquals(bin1str, bin1.toString());
+		assertEquals(bin2str, bin2.toString());
 	}
 }
